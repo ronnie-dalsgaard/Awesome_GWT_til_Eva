@@ -5,26 +5,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import age.shared.DataException;
-import age.shared.model.Area;
 import age.shared.model.Building;
 import age.shared.model.Room;
 
 public class RoomDAO implements IRoomDAO {
 	
-	
-	
-	public static void main(String[] args) {
-		try {
-			Area a = new Area(0, "Denmark");
-			Building b = new Building(1, "Faraoens Palads", "Julius Caesars vej 7", "1234", a);
-			boolean isActive = true;
-			RoomDAO dao = new RoomDAO();
-			System.out.println("New Room:\n"+dao.create(new Room("Altanen", b, isActive)));
-		} catch (DataException e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public Room create(Room room) throws DataException {
 		String roomName = room.getName();

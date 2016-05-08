@@ -87,11 +87,11 @@ public class MySQLConnector {
 		for(int i=0; i < args.length; i++){
 			stmt.setString(i+1, args[i]);			
 		}
-		return stmt.executeQuery(query);
+		return stmt.executeQuery();
 	}
 	public ResultSet doQuery(String query) throws SQLException {
 		PreparedStatement stmt = con.prepareStatement(query);
-		return stmt.executeQuery(query);
+		return stmt.executeQuery();
 	}
 
 	/**
@@ -101,11 +101,11 @@ public class MySQLConnector {
 	 * @throws DALException
 	 */
 	public void doUpdate(String query, String... args) throws SQLException {
-		PreparedStatement stmt = con.prepareStatement(query);
+		CallableStatement stmt = con.prepareCall(query);
 		for(int i=0; i < args.length; i++){
 			stmt.setString(i+1, args[i]);			
 		}
-		stmt.executeQuery(query);
+		stmt.executeUpdate();
 	}
 	
 	/**
