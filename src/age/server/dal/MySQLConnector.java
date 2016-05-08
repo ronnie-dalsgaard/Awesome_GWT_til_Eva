@@ -3,12 +3,14 @@ package age.server.dal;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
 
 /**
  * Singleton database connector
@@ -20,6 +22,7 @@ public class MySQLConnector {
 	
 	/**
 	 * Creates an instance if none exists
+	 * Arguments are read from the properties file
 	 * 
 	 * @return the instance
 	 * @throws InstantiationException
@@ -95,7 +98,6 @@ public class MySQLConnector {
 	 * Executes an update on the database
 	 * 
 	 * @param query the query to be executed
-	 * @return 1 if update successful, else 0
 	 * @throws DALException
 	 */
 	public void doUpdate(String query, String... args) throws SQLException {
@@ -105,4 +107,20 @@ public class MySQLConnector {
 		}
 		stmt.executeQuery(query);
 	}
+	
+	/**
+	 * 
+	 * @param query the query to be executed
+	 * @param args variable length array of arguments
+	 * @return a ResultSet containing the rows which fulfills the query 
+	 * @throws SQLException
+	 */
+	public ResultSet doFunction(String query, String... args) throws SQLException {
+		CallableStatement stmt = con.prepareCall(query);
+		for(int i=0; i < args.length; i++){
+			stmt.setString(i+1, args[i]);
+		}
+		return stmt.executeQuery();
+	}
+	
 }

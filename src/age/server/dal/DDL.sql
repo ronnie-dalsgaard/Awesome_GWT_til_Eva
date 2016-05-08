@@ -30,3 +30,16 @@ CREATE TABLE `age`.`room` (
   FOREIGN KEY (`buildingId`)
     REFERENCES `building` (`buildingId`)  
 );
+
+
+DELIMITER //
+DROP FUNCTION IF EXISTS createRoom //
+CREATE FUNCTION createRoom(`vName` VARCHAR(25), `vBuildingId` INT, `vIsActive` INT) RETURNS INT
+BEGIN
+  DECLARE `nextRoomId` INT DEFAULT 0;
+  SELECT MAX(`roomId`)+1 INTO `nextRoomId` FROM `room`;
+  INSERT INTO `room` (`roomId`, `name`, `buildingId`, `isActive`) 
+    VALUES (`nextRoomId`, `vName`, `vBuildingId`, `vIsActive`);
+  RETURN `nextRoomId`;
+END; //
+DELIMITER ;
