@@ -1,0 +1,3 @@
+# Module age
+# RPC service class, partial path of RPC policy file
+age.client.IRoomService, AB4351C26D39487BE00E513C1A3A2C29.gwt.rpc

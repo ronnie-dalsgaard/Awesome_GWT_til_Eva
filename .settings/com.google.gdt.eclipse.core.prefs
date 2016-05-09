@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+jarsExcludedFromWebInfLib=
+lastWarOutDir=C\:/Users/Ronnie Dalsgaard/git/Awesome_GWT_til_Eva/war
 warSrcDir=war
-warSrcDirIsOutput=false
+warSrcDirIsOutput=true

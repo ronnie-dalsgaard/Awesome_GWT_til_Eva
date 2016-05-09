@@ -1,10 +1,15 @@
 package age.shared.model;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
+	private static final long serialVersionUID = 6081232388774287698L;
 	private int id;
 	private String name;
 	private Building building;
 	private boolean isActive;
+	
+	public Room(){ }
 	
 	public Room(int id, String name, Building building, boolean isActive) {
 		this.id = id;
@@ -20,33 +25,14 @@ public class Room {
 		this.isActive = isActive;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Building getBuilding() {
-		return building;
-	}
-
-	public void setBuilding(Building building) {
-		this.building = building;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public int getId() {
-		return id;
-	}
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	public Building getBuilding() { return building; }
+	public void setBuilding(Building building) { this.building = building; }
+	public boolean isActive() { return isActive; }
+	public void setActive(boolean isActive) { this.isActive = isActive; }
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
 
 	@Override
 	public String toString() {

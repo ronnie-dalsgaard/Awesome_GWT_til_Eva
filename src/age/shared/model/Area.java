@@ -1,23 +1,23 @@
 package age.shared.model;
 
-public class Area {
+import java.io.Serializable;
+
+public class Area implements Serializable {
+	private static final long serialVersionUID = -6582034633775438299L;
 	private int id;
 	private String name;
+	
+	public Area() { }
 	
 	public Area(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getId() {
-		return id;
-	}
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
 	
 	@Override
 	public String toString() {

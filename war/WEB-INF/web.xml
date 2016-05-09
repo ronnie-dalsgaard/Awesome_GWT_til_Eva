@@ -16,9 +16,21 @@
     <url-pattern>/age/greet</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>roomServlet</servlet-name>
+    <servlet-class>age.server.RoomServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>roomServlet</servlet-name>
+    <url-pattern>/age/room</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>AGE.html</welcome-file>
+    <welcome-file>/age/AGE.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
