@@ -1,4 +1,4 @@
-package age.client;
+package age.client.views;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
+import age.client.IRoomService;
+import age.client.IRoomServiceAsync;
 import age.shared.model.Room;
 
 public class RoomView extends Composite {

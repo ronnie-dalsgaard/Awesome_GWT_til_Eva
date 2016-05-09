@@ -11,10 +11,10 @@ IRoomService_TypeSerializer,,age.client.IRoomService_TypeSerializer,,gen/age/cli
 L,age.client.IRoomService_TypeSerializer::$clinit()V,age.client.IRoomService_TypeSerializer,$clinit,gen/age/client/IRoomService_TypeSerializer.java,10,0
 M,age.client.IRoomService_TypeSerializer::IRoomService_TypeSerializer() <init>,age.client.IRoomService_TypeSerializer,IRoomService_TypeSerializer,gen/age/client/IRoomService_TypeSerializer.java,78,0
 K,age.client.IRoomService_TypeSerializer::methodMapNative,age.client.IRoomService_TypeSerializer,methodMapNative,gen/age/client/IRoomService_TypeSerializer.java,11,-1
-RoomView,,age.client.RoomView,,age/client/RoomView.java,14,-1
-lb,age.client.RoomView::RoomView() <init>,age.client.RoomView,RoomView,age/client/RoomView.java,21,0
-a,age.client.RoomView::loading_lbl,age.client.RoomView,loading_lbl,age/client/RoomView.java,18,-1
-b,age.client.RoomView::roomName_box,age.client.RoomView,roomName_box,age/client/RoomView.java,19,-1
+RoomView,,age.client.views.RoomView,,age/client/RoomView.java,14,-1
+lb,age.client.views.RoomView::RoomView() <init>,age.client.views.RoomView,RoomView,age/client/RoomView.java,21,0
+a,age.client.views.RoomView::loading_lbl,age.client.views.RoomView,loading_lbl,age/client/RoomView.java,18,-1
+b,age.client.views.RoomView::roomName_box,age.client.views.RoomView,roomName_box,age/client/RoomView.java,19,-1
 RoomView$1,,age.client.RoomView$1,,age/client/RoomView.java,25,-1
 mb,age.client.RoomView$1::$onSuccess(Lage/client/RoomView$1;Lage/shared/model/Room;)V,age.client.RoomView$1,$onSuccess,age/client/RoomView.java,28,0
 nb,age.client.RoomView$1::RoomView$1(Lage/client/RoomView;) <init>,age.client.RoomView$1,RoomView$1,age/client/RoomView.java,25,0
