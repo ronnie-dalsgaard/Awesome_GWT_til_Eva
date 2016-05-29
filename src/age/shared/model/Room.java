@@ -14,28 +14,36 @@ import javax.persistence.Table;
 @Table(name = "room")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 6081232388774287698L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name = "roomId")
 	private int id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "buildingId")
 	private int buildingId;
+	
+	@Column(name = "isActive")
 	private boolean isActive;
 		
 	public Room(){ }
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name = "roomId")
+	
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 
-	@Column(name = "name")
+	
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	
-	@Column(name = "buildingId")
+	
 	public int getBuildingId() { return buildingId; }
 	public void setBuildingId(int buildingId) { this.buildingId = buildingId; }
 	
-	@Column(name = "isActive")
+	
 	public boolean isActive() { return isActive; }
 	public void setActive(boolean isActive) { this.isActive = isActive; }
 
