@@ -32,8 +32,8 @@ public class RoomView extends Composite {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				loading_lbl.setVisible(false);
+				roomName_box.setText(caught.getMessage());
 			}
 		});
 	}

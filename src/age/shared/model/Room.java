@@ -2,41 +2,46 @@ package age.shared.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "room")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 6081232388774287698L;
 	private int id;
 	private String name;
-	private Building building;
+	private int buildingId;
 	private boolean isActive;
-	
+		
 	public Room(){ }
-	
-	public Room(int id, String name, Building building, boolean isActive) {
-		this.id = id;
-		this.name = name;
-		this.building = building;
-		this.isActive = isActive;
-	}
-	
-	public Room(String name, Building building, boolean isActive) {
-		this.id = -1;
-		this.name = name;
-		this.building = building;
-		this.isActive = isActive;
-	}
 
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
-	public Building getBuilding() { return building; }
-	public void setBuilding(Building building) { this.building = building; }
-	public boolean isActive() { return isActive; }
-	public void setActive(boolean isActive) { this.isActive = isActive; }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name = "roomId")
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 
+	@Column(name = "name")
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	
+	@Column(name = "buildingId")
+	public int getBuildingId() { return buildingId; }
+	public void setBuildingId(int buildingId) { this.buildingId = buildingId; }
+	
+	@Column(name = "isActive")
+	public boolean isActive() { return isActive; }
+	public void setActive(boolean isActive) { this.isActive = isActive; }
+
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", name=" + name + ", building=" + building + ", isActive=" + isActive + "]";
+		return "Room [id=" + id + ", name=" + name + ", buildingId=" + buildingId + ", isActive=" + isActive + "]";
 	}
 
 	@Override
