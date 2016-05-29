@@ -1,7 +1,6 @@
 package age.client.views;
 
 import java.util.List;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -13,7 +12,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -24,8 +22,9 @@ import age.shared.model.Area;
 import age.shared.model.Building;
 import age.shared.model.Room;
 
-public class SelectRoomView extends Composite implements HasText {
+public class SelectRoomView extends Composite {
 
+	private final String LoadString = "Loading....";
 	private static SelectRoomViewUiBinder uiBinder = GWT.create(SelectRoomViewUiBinder.class);
 
 	interface SelectRoomViewUiBinder extends UiBinder<Widget, SelectRoomView> {
@@ -46,53 +45,17 @@ public class SelectRoomView extends Composite implements HasText {
 	@UiField
 	ListBox roomDropDown;
 	
-	private List<Area> _areas;
-	private List<Building> _buildings;
-	private List<Room> _rooms;
-
+	final IRoomServiceAsync roomService = GWT.create(IRoomService.class);
 	
 	public SelectRoomView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		IRoomServiceAsync roomService = GWT.create(IRoomService.class);
-		roomService.getAllAreas(new AsyncCallback<List<Area>>() {
-			
-			@Override
-			public void onFailure(Throwable caught) {
-			}
-
-			@Override
-			public void onSuccess(List<Area> result) {
-				SetAreaDropdown(result);
-				_areas = result;
-			}
-		});
-		
-		areaDropDown.addChangeHandler(new ChangeHandler() {
-			
-			@Override
-			public void onChange(ChangeEvent event) {
-				buildingDropDown.clear();
-				buildingDropDown.addItem("Loading...");
-				
-//				roomService.getBuildingsForArea(areaId, callback);
-			}
-		});
-		
-//		buildingDropDown.addChangeHandler(new ChangeHandler() {
-
-//		@Override
-//		public void onChange(ChangeEvent event) {
-//			roomDropDown.clear();
-//			
-//			roomService.getRoomsForBuildning(building, callback);
-//			
-//			
-//		}
-//    })
-		
+		areaDropDown.addChangeHandler(new AreaDropDownHanlder());
+		buildingDropDown.addChangeHandler(new BuildingDropDownHandler());
+		roomDropDown.addChangeHandler(new RoomDropdDownHandler());
+		populateAreaDropdown();
 		
 		button.setText("Klik mig din frækkert");		
-		areaLbl.setText("Vælg Area");
+		areaLbl.setText("Vælg Område");
 		buildingLbl.setText("Vælg bygning");
 		roomLbl.setText("Vælg Værelse");
 	}
@@ -108,40 +71,109 @@ public class SelectRoomView extends Composite implements HasText {
 		Window.alert("Hello!");
 	}
 
-	public void setText(String text) {
-		button.setText(text);
+	
+	
+	private void populateAreaDropdown() {
+
+		roomService.getAllAreas(new AsyncCallback<List<Area>>() {
+			
+			@Override
+			public void onSuccess(List<Area> result) {
+				roomDropDown.clear();
+				buildingDropDown.clear();
+				areaDropDown.clear();
+				button.setEnabled(false);
+				for(Area a: result)
+				{
+					areaDropDown.addItem(a.getName(), Integer.toString(a.getId()));
+				}
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+	}
+	public void populateBuildingDropDown() {
+
+		int areaId = Integer.parseInt(areaDropDown.getSelectedValue());
+		roomService.getBuildingsForArea(areaId, new AsyncCallback<List<Building>>() {
+			
+			@Override
+			public void onSuccess(List<Building> result) {
+				buildingDropDown.clear();
+				roomDropDown.clear();
+				button.setEnabled(false);
+				for(Building b : result){
+					buildingDropDown.addItem(b.getName(), Integer.toString(b.getId()));
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+	}
+	
+	public void populateRoomDropDown() {
+		int buildingId = Integer.parseInt(buildingDropDown.getSelectedValue());
+		roomService.getRoomsForBuildning(buildingId, new AsyncCallback<List<Room>>() {
+			
+			@Override
+			public void onSuccess(List<Room> result) {
+				roomDropDown.clear();
+				button.setEnabled(!result.isEmpty());
+				for(Room r : result){
+					roomDropDown.addItem(r.getName(), Integer.toString(r.getId()));
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+		
+	}
+	
+	private class AreaDropDownHanlder implements ChangeHandler
+	{
+
+		@Override
+		public void onChange(ChangeEvent event) {
+			buildingDropDown.clear();
+			roomDropDown.clear();
+			button.setEnabled(false);
+			
+			buildingDropDown.addItem(LoadString);
+			populateBuildingDropDown();
+		}
+		
 	}
 
-	public String getText() {
-		return button.getText();
-	}
+	private class BuildingDropDownHandler implements ChangeHandler
+	{
 
-	
-	private void SetAreaDropdown(List<Area> list) {
-		roomDropDown.clear();
-		buildingDropDown.clear();
-		areaDropDown.clear();
-		for(Area a: list)
-		{
-			areaDropDown.addItem(a.getName(), Integer.toString(a.getId()));
+		@Override
+		public void onChange(ChangeEvent event) {
+			roomDropDown.clear();
+			button.setEnabled(false);
+			roomDropDown.addItem(LoadString);
+			populateRoomDropDown();
 		}
 	}
 	
-	private void SetBuildingsDropdown(List<Building> list) {
-		roomDropDown.clear();
-		buildingDropDown.clear();
-		for(Building b: list)
-		{
-			buildingDropDown.addItem(b.getName(), Integer.toString(b.getId()));
+	private class RoomDropdDownHandler implements ChangeHandler{
+
+		@Override
+		public void onChange(ChangeEvent event) {
+//			button.setEnabled(false);
+			//TODO: Pil valgt værdi ud her og brug til andet views callback
 		}
+		
 	}
-	
-	private void SetRoomsDropdown(List<Room> list) {
-		roomDropDown.clear();
-		for(Room r: list)
-		{
-			roomDropDown.addItem(r.getName(), Integer.toString(r.getId()));
-		}
-	}
-	
 }
+
