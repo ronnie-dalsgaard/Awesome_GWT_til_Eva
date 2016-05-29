@@ -23,31 +23,38 @@ import age.shared.model.Building;
 import age.shared.model.Room;
 
 public class SelectRoomView extends Composite {
+	
+	public interface ISelectRoomViewCallback {
+		public void OnRoomSelected(Room room);
+	}
+	private ISelectRoomViewCallback callback;
 
 	private final String LoadString = "Loading....";
 	private static SelectRoomViewUiBinder uiBinder = GWT.create(SelectRoomViewUiBinder.class);
 
-	interface SelectRoomViewUiBinder extends UiBinder<Widget, SelectRoomView> {
-	}
+	interface SelectRoomViewUiBinder extends UiBinder<Widget, SelectRoomView> {	}
 
-	@UiField
-	Button button;
-	@UiField
-	Label areaLbl;
-	@UiField
-	Label buildingLbl;
-	@UiField
-	Label roomLbl;
-	@UiField
-	ListBox areaDropDown;
-	@UiField
-	ListBox buildingDropDown;
-	@UiField
-	ListBox roomDropDown;
+	@UiField Button button;
+	@UiField Label areaLbl;
+	@UiField Label buildingLbl;
+	@UiField Label roomLbl;
+	@UiField ListBox areaDropDown;
+	@UiField ListBox buildingDropDown;
+	@UiField ListBox roomDropDown;
 	
-	final IRoomServiceAsync roomService = GWT.create(IRoomService.class);
+	private final IRoomServiceAsync roomService = GWT.create(IRoomService.class);
 	
 	public SelectRoomView() {
+		init();
+	}
+
+
+	public SelectRoomView(ISelectRoomViewCallback callback) {
+		init();
+		this.callback = callback;
+	}
+	
+	private void init(){
 		initWidget(uiBinder.createAndBindUi(this));
 		areaDropDown.addChangeHandler(new AreaDropDownHanlder());
 		buildingDropDown.addChangeHandler(new BuildingDropDownHandler());
@@ -57,13 +64,7 @@ public class SelectRoomView extends Composite {
 		button.setText("Klik mig din frækkert");		
 		areaLbl.setText("Vælg Område");
 		buildingLbl.setText("Vælg bygning");
-		roomLbl.setText("Vælg Værelse");
-	}
-
-
-	public SelectRoomView(String firstName) {
-		initWidget(uiBinder.createAndBindUi(this));
-		
+		roomLbl.setText("Vælg Værelse");		
 	}
 
 	@UiHandler("button")
@@ -170,8 +171,19 @@ public class SelectRoomView extends Composite {
 
 		@Override
 		public void onChange(ChangeEvent event) {
-//			button.setEnabled(false);
-			//TODO: Pil valgt værdi ud her og brug til andet views callback
+			int roomId = Integer.parseInt(roomDropDown.getSelectedValue());
+			roomService.getRoom(roomId, new AsyncCallback<Room>() {
+				
+				@Override
+				public void onSuccess(Room result) {
+					callback.OnRoomSelected(result);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert(caught.getMessage());
+				}
+			});
 		}
 		
 	}
