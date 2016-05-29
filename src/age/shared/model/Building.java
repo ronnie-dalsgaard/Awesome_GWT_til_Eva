@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +19,7 @@ public class Building implements Serializable {
 	private String name;
 	private String adress;
 	private String zip;
-	private int areaId;
+	private Area area;
 	
 	public Building() { }
 	
@@ -39,13 +41,14 @@ public class Building implements Serializable {
 	public String getZip() { return zip; }
 	public void setZip(String zip) { this.zip = zip; }
 	
-	@Column(name = "areaId")
-	public int getAreaId() { return areaId; }
-	public void setAreaId(int areaId) { this.areaId = areaId; }
+	@OneToOne
+    @JoinColumn(name = "areaId")
+	public Area getArea() { return area; }
+	public void setArea(Area area) { this.area = area; }
 
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", name=" + name + ", adress=" + adress + ", zip=" + zip + ", area=" + areaId + "]";
+		return "Building [id=" + id + ", name=" + name + ", adress=" + adress + ", zip=" + zip + ", area=" + area.toString() + "]";
 	}
 
 	@Override
