@@ -15,4 +15,8 @@ public interface IRoomService extends RemoteService {
 	public List<Area> getAllAreas();
 	public List<Building> getAllBuildings();
 	public List<Room> getAllRooms();
+	public List<Room> getRoomsForBuildning(Building building);
+	public List<Building> getBuildingsForArea(Area area);
+	
+	
 }

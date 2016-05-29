@@ -13,5 +13,7 @@ public interface IRoomServiceAsync {
 	public void getAllAreas(AsyncCallback<List<Area>> callback);
 	public void getAllBuildings(AsyncCallback<List<Building>> callback);
 	public void getAllRooms(AsyncCallback<List<Room>> callback);
+	public void getRoomsForBuildning(Building building, AsyncCallback<List<Room>> callback);
+	public void getBuildingsForArea(Area area, AsyncCallback<List<Building>> callback);
 
 }
