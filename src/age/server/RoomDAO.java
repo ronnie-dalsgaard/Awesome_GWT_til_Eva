@@ -93,7 +93,7 @@ public class RoomDAO {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         
-        Query query = session.createQuery("from Room where areaId = :areaId");
+        Query query = session.createQuery("from Building where areaId = :areaId");
         query.setParameter("areaId", areaId);
         @SuppressWarnings("unchecked")
 		List<Building> res = query.list();

@@ -44,11 +44,10 @@ public class RoomView extends Composite {
 //			}
 //		});
 		
-		
-		roomService.getRoomsForBuildning(0, new AsyncCallback<List<Room>>() {
+		roomService.getBuildingsForArea(0, new AsyncCallback<List<Building>>() {
 			
 			@Override
-			public void onSuccess(List<Room> result) {
+			public void onSuccess(List<Building> result) {
 				loading_lbl.setVisible(false);
 				roomName_box.setText(result.toString());
 			}
