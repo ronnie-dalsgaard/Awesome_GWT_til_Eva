@@ -32,13 +32,12 @@ public class Room implements Serializable {
 	@Column(name = "name")
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	
+
 	@OneToOne
     @JoinColumn(name = "buildingId")
 	public Building getBuilding() { return building; }
 	public void setBuilding(Building building) { this.building = building; }
 	
-	@Column(name = "isActive")
 	public boolean isActive() { return isActive; }
 	public void setActive(boolean isActive) { this.isActive = isActive; }
 
