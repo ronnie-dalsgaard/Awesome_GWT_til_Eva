@@ -1,5 +1,7 @@
 package age.client.views;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -11,7 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import age.client.IRoomService;
 import age.client.IRoomServiceAsync;
-import age.shared.model.Room;
+import age.shared.model.Building;
 
 public class RoomView extends Composite {
 	private static RoomViewUiBinder uiBinder = GWT.create(RoomViewUiBinder.class);
@@ -24,21 +26,21 @@ public class RoomView extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		IRoomServiceAsync roomService = GWT.create(IRoomService.class);
-		roomService.getRoom(3, new AsyncCallback<Room>() {
+
+		
+		roomService.getAllBuildings(new AsyncCallback<List<Building>>() {
 			
 			@Override
-			public void onSuccess(Room result) {
+			public void onSuccess(List<Building> result) {
 				loading_lbl.setVisible(false);
 				roomName_box.setText(result.toString());
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				loading_lbl.setVisible(false);
+				roomName_box.setText(caught.toString());
 			}
 		});
 	}
-
-
 }
