@@ -29,7 +29,11 @@ public class SelectRoomView extends Composite {
 	}
 	private ISelectRoomViewCallback callback;
 
-	private final String LoadString = "Loading....";
+	public void setCallback(ISelectRoomViewCallback callback) {
+		this.callback = callback;
+	}
+
+	private final String LoadString = "Loading...";
 	private static SelectRoomViewUiBinder uiBinder = GWT.create(SelectRoomViewUiBinder.class);
 
 	interface SelectRoomViewUiBinder extends UiBinder<Widget, SelectRoomView> {	}
