@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import age.client.views.RoomView;
+import age.client.views.SelectRoomView;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -11,6 +12,6 @@ import age.client.views.RoomView;
 public class AGE implements EntryPoint {
 	
 	public void onModuleLoad() {
-		RootPanel.get().add(new RoomView());
+		RootPanel.get().add(new SelectRoomView());
 	}
 }
