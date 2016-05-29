@@ -12,6 +12,6 @@ import age.client.views.SelectRoomView;
 public class AGE implements EntryPoint {
 	
 	public void onModuleLoad() {
-		RootPanel.get().add(new SelectRoomView());
+		RootPanel.get().add(new RoomView());
 	}
 }

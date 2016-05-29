@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:views="urn:import:age.client.views">
 	<ui:style>
 	.important {
 		font-weight: bold;
@@ -11,6 +11,7 @@
 			<g:Label ui:field="loading_lbl" text="Loading..." />
 			
 			<g:TextBox ui:field="roomName_box"></g:TextBox>
+			<views:SelectRoomView ui:field="selectRoomView"/>
 		</g:VerticalPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 
