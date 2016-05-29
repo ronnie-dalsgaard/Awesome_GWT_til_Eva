@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.important {
+		font-weight: bold;
+	}
+	</ui:style>
+	<g:HTMLPanel>
+		Hello,
+		
+		<g:Label ui:field="areaLbl" />
+		<g:ListBox ui:field="areaDropDown"/>
+		<g:Label ui:field="buildingLbl" />
+		<g:ListBox ui:field="buildingDropDown"/>
+		<g:Label ui:field="roomLbl" />
+		<g:ListBox ui:field="roomDropDown"/>
+		
+		<g:Button styleName="{style.important}" ui:field="button" enabled="false" />
+	</g:HTMLPanel>
+</ui:UiBinder> 
