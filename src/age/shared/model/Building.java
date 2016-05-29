@@ -13,43 +13,33 @@ import javax.persistence.Table;
 @Table(name = "building")
 public class Building implements Serializable {
 	private static final long serialVersionUID = 1304236228402183235L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name = "buildingId")
 	private int id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "adress")
 	private String adress;
-	
-	@Column(name = "zip")
 	private String zip;
-	
-	@Column(name = "areaId")
 	private int areaId;
 	
 	public Building() { }
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name = "buildingId")
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 
-	
+	@Column(name = "name")
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	
-	
+	@Column(name = "adress")
 	public String getAdress() { return adress; }
 	public void setAdress(String adress) { this.adress = adress; }
 	
-	
+	@Column(name = "zip")
 	public String getZip() { return zip; }
 	public void setZip(String zip) { this.zip = zip; }
 	
-	
+	@Column(name = "areaId")
 	public int getAreaId() { return areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; }
 

@@ -13,22 +13,18 @@ import javax.persistence.Table;
 @Table(name = "area")
 public class Area implements Serializable {
 	private static final long serialVersionUID = -6582034633775438299L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name = "areaId")
 	private int id;
-	
-	@Column(name = "name")
 	private String name;
 	
 	public Area() { }
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name = "areaId")
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 	
-	
+	@Column(name = "name")
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	

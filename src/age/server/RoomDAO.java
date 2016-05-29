@@ -21,7 +21,7 @@ public class RoomDAO {
 //        	System.out.println(room);
 //        }
         
-        Query query = session.createQuery("from Roome where id = :id ");
+        Query query = session.createQuery("from Room where id = :id ");
         query.setParameter("id", id);
         @SuppressWarnings("unchecked")
 		List<Room> rooms = query.list();

@@ -29,7 +29,7 @@ public class RoomView extends Composite {
 			@Override
 			public void onSuccess(Room result) {
 				loading_lbl.setVisible(false);
-				roomName_box.setText(result.getName());
+				roomName_box.setText(result.toString());
 			}
 			
 			@Override

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -14,42 +16,34 @@ import javax.persistence.Table;
 @Table(name = "room")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 6081232388774287698L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name = "roomId")
 	private int id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "buildingId")
-	private int buildingId;
-	
-	@Column(name = "isActive")
+	private Building building;
 	private boolean isActive;
 		
 	public Room(){ }
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name = "roomId")
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 
-	
+	@Column(name = "name")
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	
-	
-	public int getBuildingId() { return buildingId; }
-	public void setBuildingId(int buildingId) { this.buildingId = buildingId; }
-	
+
+	@OneToOne
+    @JoinColumn(name = "buildingId")
+	public Building getBuilding() { return building; }
+	public void setBuilding(Building building) { this.building = building; }
 	
 	public boolean isActive() { return isActive; }
 	public void setActive(boolean isActive) { this.isActive = isActive; }
 
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", name=" + name + ", buildingId=" + buildingId + ", isActive=" + isActive + "]";
+		return "Room [id=" + id + ", name=" + name + ", building=" + building.toString() + ", isActive=" + isActive + "]";
 	}
 
 	@Override
