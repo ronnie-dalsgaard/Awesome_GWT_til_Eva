@@ -38,6 +38,7 @@ public class Room implements Serializable {
 	public Building getBuilding() { return building; }
 	public void setBuilding(Building building) { this.building = building; }
 	
+	@Column(name = "isActive")
 	public boolean isActive() { return isActive; }
 	public void setActive(boolean isActive) { this.isActive = isActive; }
 

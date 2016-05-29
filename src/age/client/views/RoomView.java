@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
 import age.client.IRoomService;
 import age.client.IRoomServiceAsync;
 import age.shared.model.Building;
+import age.shared.model.Room;
 
 public class RoomView extends Composite {
 	private static RoomViewUiBinder uiBinder = GWT.create(RoomViewUiBinder.class);
@@ -28,10 +29,26 @@ public class RoomView extends Composite {
 		IRoomServiceAsync roomService = GWT.create(IRoomService.class);
 
 		
-		roomService.getAllBuildings(new AsyncCallback<List<Building>>() {
+//		roomService.getAllBuildings(new AsyncCallback<List<Building>>() {
+//			
+//			@Override
+//			public void onSuccess(List<Building> result) {
+//				loading_lbl.setVisible(false);
+//				roomName_box.setText(result.toString());
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				loading_lbl.setVisible(false);
+//				roomName_box.setText(caught.toString());
+//			}
+//		});
+		
+		
+		roomService.getRoomsForBuildning(0, new AsyncCallback<List<Room>>() {
 			
 			@Override
-			public void onSuccess(List<Building> result) {
+			public void onSuccess(List<Room> result) {
 				loading_lbl.setVisible(false);
 				roomName_box.setText(result.toString());
 			}
