@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,7 +18,7 @@ public class Room implements Serializable {
 	private static final long serialVersionUID = 6081232388774287698L;
 	private int id;
 	private String name;
-	private int buildingId;
+	private Building building;
 	private boolean isActive;
 		
 	public Room(){ }
@@ -31,9 +33,10 @@ public class Room implements Serializable {
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	
-	@Column(name = "buildingId")
-	public int getBuildingId() { return buildingId; }
-	public void setBuildingId(int buildingId) { this.buildingId = buildingId; }
+	@OneToOne
+    @JoinColumn(name = "buildingId")
+	public Building getBuilding() { return building; }
+	public void setBuilding(Building building) { this.building = building; }
 	
 	@Column(name = "isActive")
 	public boolean isActive() { return isActive; }
@@ -41,7 +44,7 @@ public class Room implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", name=" + name + ", buildingId=" + buildingId + ", isActive=" + isActive + "]";
+		return "Room [id=" + id + ", name=" + name + ", building=" + building.toString() + ", isActive=" + isActive + "]";
 	}
 
 	@Override
