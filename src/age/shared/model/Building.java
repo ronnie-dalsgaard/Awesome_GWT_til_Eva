@@ -2,6 +2,7 @@ package age.shared.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "building")
@@ -41,7 +43,7 @@ public class Building implements Serializable {
 	public String getZip() { return zip; }
 	public void setZip(String zip) { this.zip = zip; }
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "areaId")
 	public Area getArea() { return area; }
 	public void setArea(Area area) { this.area = area; }

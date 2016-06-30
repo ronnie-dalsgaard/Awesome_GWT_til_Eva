@@ -2,6 +2,7 @@ package age.shared.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Room implements Serializable {
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "buildingId")
 	public Building getBuilding() { return building; }
 	public void setBuilding(Building building) { this.building = building; }
